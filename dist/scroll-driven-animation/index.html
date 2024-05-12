@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playground | Scroll Driven Animation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      color: #010720;
+      background-color: light-dark(#d355ff,#120527);
+    }
+
+    main {
+      --padding: 1rem 2rem;
+      --bg: #ffffff;
+      /* background-color: var(--bg); */
+      max-width: 900px;
+      margin-inline: auto;
+      min-height: 100dvh;
+    }
+
+    .banner {
+      width: 100%;
+      aspect-ratio: 3;
+      border-bottom: 13px solid var(--bg);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    .profile {
+      width: 300px;
+      aspect-ratio: 1;
+      border: 13px solid var(--bg);
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      translate: -50% -50%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .text {
+      padding: var(--padding);
+      padding-block-start: 150px;
+      padding-block-end: 2rem;
+      background-color: rgb(239, 204, 140);
+
+      h1 {
+        margin-block-end: 1rem;
+      }
+    }
+
+    nav {
+      height: 4rem;
+      display: flex;
+      gap: 1rem;
+      background-color: var(--bg);
+      padding: var(--padding);
+
+      a {
+        padding-inline: 1rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        color: #010720;
+      }
+    }
+
+    section {
+      width: 100%;
+      display: grid;
+      place-items: center;
+      --gap: 2rem;
+      gap: var(--gap);
+      margin-block-start: var(--gap);
+    }
+
+    article {
+      background-color: var(--bg);
+      padding: var(--padding);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="banner">
+        <img src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?q=80&w=700" height="" alt="Pillar of creation, maybe? In orange hue">
+      </div>
+      <div class="profile">
+        <img src="./profile-lg.webp" alt="wow">
+      </div>
+      <div class="text">
+        <h1>Lorem ipsum</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque, dicta facere praesentium voluptas earum assumenda quo odit rerum vel, impedit suscipit quod enim, sequi necessitatibus libero esse nesciunt. Distinctio, illum.</p>
+      </div>
+      <nav>
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Secrets</a>
+      </nav>
+    </header>
+
+    <section>
+      <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quisquam saepe eaque nihil! Corrupti quia, libero cum a inventore beatae rem facilis nobis, consequatur iste suscipit mollitia error explicabo pariatur!</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+      <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus expedita consectetur dolore ducimus aliquid, repellendus quidem nostrum ipsa reprehenderit illum cum, iusto corporis neque esse temporibus tenetur odio blanditiis omnis?</article>
+    </section>
+  </main>
+</body>
+</html>

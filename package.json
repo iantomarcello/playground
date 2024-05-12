@@ -1,0 +1,12 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "A playground to try and experiment on new CSS and JS stuffs.",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start -w --open -s dist --port 8916 "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
