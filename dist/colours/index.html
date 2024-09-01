@@ -12,11 +12,6 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      :root {
-        --colour_1: rgb(249, 52, 8);
-        --colour_2: rgb(0, 4, 255);
-      }
-
       * {
         font-family: "Sora", sans-serif;
       }
@@ -25,11 +20,8 @@
         --columns: 5;
         --rows: 5;
         --cell_size: 56px;
-        width: max-content;
         display: grid;
         margin: auto;
-        /* grid-template-columns: var(--cell_size) max-content var(--cell_size);
-        grid-template-rows: var(--cell_size) max-content var(--cell_size); */
 
         width: 100%;
         height: 100dvh;
@@ -38,114 +30,22 @@
 
       .cells-wrapper {
         display: grid;
-        grid-area: 2 / 2;
         grid-template-columns: repeat(var(--columns), var(--cell_size));
         grid-template-rows: repeat(var(--rows), var(--cell_size));
         gap: inherit;
       }
 
-      .cell {
-        > button {
-          --c: 1;
-          --r: 1;
-          width: var(--cell_size);
-          height: var(--cell_size);
-          border-radius: 8px;
-          border: 3px solid cornsilk;
-          box-shadow: 0 0 8px rgb(204, 204, 204);
-          background-color: hsl(from var(--colour_1) calc(h * (var(--c) * var(--r))) s l);
-        }
-      }
-
-      .anchor {
-        anchor-name: --actions-anchor;
-      }
-
-      .actions {
-        position: fixed;
-        position-anchor: --actions-anchor;
-        top: calc(anchor(top));
-        justify-self: anchor-center;
-        margin: 0;
-        overflow: visible;
-        padding: 0;
-      }
-
-      .action-button {
-        --radius: 90px;
-        --degree: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(var(--cell_size) * 0.7);
-        aspect-ratio: 1;
-        padding: 0;
-        border-radius: 50%;
-        position: absolute;
-        z-index: -1;
-        translate: -50% -50%;
-        left: calc(var(--radius) * sin(pi / 180 * var(--degree)));
-        top: calc(var(--radius) * cos(pi / 180 * var(--degree)));
-        transition-property: var(--radius), opacity, scale;
-        transition-duration: 0.3s;
-        transition-behavior: allow-discrete;
-
-        @starting-style {
-          .actions:popover-open & {
-            --radius: 0px;
-            opacity: 0;
-            scale: 0.3;
-          }
-        }
-
-        svg {
-          width: 55%;
-          height: auto;
-        }
-
-        &:nth-child(1) {
-          --degree: -36;
-          transition-delay: 0;
-        }
-        &:nth-child(2) {
-          --degree: 0;
-          transition-delay: 0.05s;
-        }
-        &:nth-child(3) {
-          --degree: 36;
-          transition-delay: 0.1s;
-        }
-      }
     </style>
   </head>
-  <body class="">
-    <main class="max-w-3xl w-100 p-8 mx-auto">
+  <body class="bg-purple-400">
+    <main class="max-w-3xl w-100 mx-auto">
       <section id="$wrapper" class="wrapper gap-4">
-        <div class="cell hover:opacity-90">
-          <button class="w-full h-full anchor" title="open actions" popovertarget="actions"></button>
-          <div id="actions" class="actions" popover>
-            <button class="action-button bg-red-500" title="Edit">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#e8eaed"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-              <!-- TODO: input colour -->
-            </button>
-            <button class="action-button bg-orange-500" title="Copy">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#e8eaed"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-              <!-- TODO: Copy colour -->
-            </button>
-            <button class="action-button bg-yellow-500" title="Clear">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#e8eaed"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"/></svg>
-              <!-- TODO: clear colour -->
-            </button>
-          </div>
-        </div>
-        <div id="$cellsWrapper" class="cells-wrapper" hidden>
+        <div id="$cellsWrapper" class="cells-wrapper">
           <!-- Populate by JS -->
         </div>
       </section>
     </main>
-    <template id="$cellTemplate">
-      <div class="cell"></div>
-    </template>
+    <script type="module" src="./le-swatch.js"></script>
     <script>
       function getRowAndColumn() {
         const rows = getComputedStyle($wrapper).getPropertyValue('--rows');
@@ -156,19 +56,32 @@
       function populateCells(rows, columns) {
         for (let i = 1; i <= columns; i++) {
           for (let j = 1; j <= rows; j++) {
-            let template = $cellTemplate.content.cloneNode(true);
-            template.querySelector('.cell').style.setProperty('--r', j);
-            template.querySelector('.cell').style.setProperty('--c', i);
-            $cellsWrapper.appendChild(template);
+            let swatch = document.createElement('le-swatch')
+            swatch.addEventListener('change', handleSwatchChange);
+            swatch.dataset.x = i;
+            swatch.dataset.y = j;
+            $cellsWrapper.appendChild(swatch);
           }
         }
       }
 
+      function handleSwatchChange(event) {
+        let {x, y} = event.currentTarget.dataset;
+        document.querySelectorAll('le-swatch').forEach((swatch) => {
+          if (swatch !== event.currentTarget) {
+            // TODO: Math the logic to spread colour evenly, look for Vector distance calculation
+            swatch.colour = event.detail.colour;
+          }
+        })
+      }
+
       function init() {
-        // let [rows, columns] = getRowAndColumn();
-        // populateCells(rows, columns)
+        let [rows, columns] = getRowAndColumn();
+        populateCells(rows, columns)
       }
       init();
+
+
     </script>
   </body>
 </html>
