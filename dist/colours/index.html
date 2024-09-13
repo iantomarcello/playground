@@ -79,7 +79,7 @@
       }
 
       function blendSwatches(x, y, colour) {
-        const rootStyle = window.getComputedStyle(document.body);
+        const rootStyle = getComputedStyle(document.body);
         const bleed = parseFloat(rootStyle.getPropertyValue('--bleed'));
         const strength = rootStyle.getPropertyValue('--strength');
 
@@ -102,8 +102,7 @@
                   rgb(from ${colour} r g b / alpha)
                   calc(${bleed - distance} *
                   ${strength}))`;
-              const computedColour = window
-                .getComputedStyle(tempElement)
+              const computedColour = getComputedStyle(tempElement)
                 .getPropertyValue('background-color');
               document.body.removeChild(tempElement)
 

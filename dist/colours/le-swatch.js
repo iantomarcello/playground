@@ -163,6 +163,7 @@ export class leSwatch extends LitElement {
             </svg>
             <input
               type="color"
+              value="${this.colour}"
               @input="${(event) =>
                 this.updateColour(event.currentTarget.value)}"
             />
