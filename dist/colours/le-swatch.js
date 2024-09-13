@@ -61,7 +61,7 @@ export class leSwatch extends LitElement {
       transition-property: var(--radius), opacity, scale;
       transition-duration: 0.3s;
       transition-behavior: allow-discrete;
-      box-shadow: 0 0 3px 0.5px rgb(255 255 255);
+      box-shadow: 0 0 2px 2px hsl(0 0 90 / 1);
 
       @starting-style {
         .swatch-actions:popover-open & {
@@ -74,6 +74,7 @@ export class leSwatch extends LitElement {
       svg {
         width: 55%;
         height: auto;
+        filter: drop-shadow(0 0 1px hsl(0 0 0 / 0.7));
       }
 
       &:nth-child(1) {
@@ -120,16 +121,15 @@ export class leSwatch extends LitElement {
     alert("Copied " + this.colour);
   }
 
-  updated(changes) {
-    if (changes.has("colour")) {
-      this.dispatchEvent(
-        new CustomEvent("change", {
-          detail: { colour: this.colour },
-          bubbles: true,
-          composed: true,
-        })
-      );
-    }
+  updateColour(colour) {
+    this.colour = colour;
+    this.dispatchEvent(
+      new CustomEvent("change", {
+        detail: { colour: this.colour },
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 
   render() {
@@ -160,7 +160,7 @@ export class leSwatch extends LitElement {
             </svg>
             <input
               type="color"
-              @input="${(event) => (this.colour = event.currentTarget.value)}"
+              @input="${(event) => this.updateColour(event.currentTarget.value)}"
             />
           </div>
           <button
@@ -186,7 +186,7 @@ export class leSwatch extends LitElement {
           <button
             class="swatch-action-button"
             title="Clear"
-            @click="${(event) => (this.colour = "transparent")}"
+            @click="${(event) => this.updateColour("transparent")}"
             style="background-color: hsl(from ${this
               .colour} h calc(s * 0.2) 55%);"
           >
