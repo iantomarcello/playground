@@ -124,11 +124,6 @@ export class leSwatch extends LitElement {
 
   async updateColour(colour) {
     this.colour = colour;
-    await new Promise((resolve) => setTimeout(() => {resolve(null);}, 1));
-    const computedColour = await window.getComputedStyle(
-      this.shadowRoot.querySelector(".swatch")
-    ).getPropertyValue('background-color');
-    this.colour = computedColour;
 
     // TODO: throttle this perhaps to colour changes doesn't stack on other swatches
     this.dispatchEvent(

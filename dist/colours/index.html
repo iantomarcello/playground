@@ -86,20 +86,32 @@
 
         document.querySelectorAll('le-swatch').forEach((swatch) => {
           if (swatch.dataset.x != x || swatch.dataset.y !== y) {
-            const {x: sx, y: sy} = swatch.dataset;
-            const distance = Math.sqrt(Math.pow((x - sx), 2) + Math.pow((y - sy), 2));
-            distance === 0 && console.log(sx, sy)
+            const { x: sx, y: sy } = swatch.dataset;
+            const distance = Math.sqrt(
+              Math.pow(x - sx, 2) + Math.pow(y - sy, 2),
+            );
+            distance === 0 && console.log(sx, sy);
             if (distance <= bleed) {
               const originalColour = swatch.colour;
-              swatch.colour = `color-mix(
+
+              // NOTE: Create a temp element to get computed colour.
+              const tempElement = document.createElement('div');
+              document.body.appendChild(tempElement);
+              tempElement.style.backgroundColor = `color-mix(
                 in srgb,
                 rgb(from ${swatch.colour} r g b / alpha),
                   rgb(from ${colour} r g b / alpha)
                   calc(${bleed - distance} *
                   ${strength}))`;
+              const computedColour = window
+                .getComputedStyle(tempElement)
+                .getPropertyValue('background-color');
+              document.body.removeChild(tempElement)
+
+              swatch.colour = computedColour;
             }
           }
-        })
+        });
       }
 
       // TODO: GUI to update size bleed and strength.
