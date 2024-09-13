@@ -12,14 +12,13 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-
       :root {
         --bleed: 4;
         --strength: 20%;
       }
 
       * {
-        font-family: "Sora", sans-serif;
+        font-family: 'Sora', sans-serif;
       }
 
       .wrapper {
@@ -40,7 +39,6 @@
         grid-template-rows: repeat(var(--rows), var(--cell_size));
         gap: inherit;
       }
-
     </style>
   </head>
   <body class="bg-purple-400">
@@ -55,14 +53,15 @@
     <script>
       function getRowAndColumn() {
         const rows = getComputedStyle($wrapper).getPropertyValue('--rows');
-        const columns = getComputedStyle($wrapper).getPropertyValue('--columns');
+        const columns =
+          getComputedStyle($wrapper).getPropertyValue('--columns');
         return [rows, columns];
       }
 
       function populateCells(rows, columns) {
         for (let i = 1; i <= columns; i++) {
           for (let j = 1; j <= rows; j++) {
-            let swatch = document.createElement('le-swatch')
+            let swatch = document.createElement('le-swatch');
             swatch.addEventListener('change', handleSwatchChange);
             swatch.dataset.x = i;
             swatch.dataset.y = j;
@@ -74,7 +73,7 @@
       function handleSwatchChange(event) {
         /** @type HTMLInputElement */
         const target = event.currentTarget;
-        let {x, y} = target.dataset;
+        let { x, y } = target.dataset;
         event.currentTarget.dataset.touched = true;
         blendSwatches(x, y, target.colour);
       }
@@ -118,11 +117,9 @@
 
       function init() {
         let [rows, columns] = getRowAndColumn();
-        populateCells(rows, columns)
+        populateCells(rows, columns);
       }
       init();
-
-
     </script>
   </body>
 </html>
