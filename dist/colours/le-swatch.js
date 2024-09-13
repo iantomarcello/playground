@@ -109,11 +109,12 @@ export class leSwatch extends LitElement {
 
   static properties = {
     colour: { type: String, attribute: true },
+    computedColour: { type: String, attribute: true },
   };
 
   constructor() {
     super();
-    this.colour = "transparent";
+    this.colour = "hsl(0 0 0 / 0)";
   }
 
   async copyColour() {
@@ -121,8 +122,15 @@ export class leSwatch extends LitElement {
     alert("Copied " + this.colour);
   }
 
-  updateColour(colour) {
+  async updateColour(colour) {
     this.colour = colour;
+    await new Promise((resolve) => setTimeout(() => {resolve(null);}, 1));
+    const computedColour = await window.getComputedStyle(
+      this.shadowRoot.querySelector(".swatch")
+    ).getPropertyValue('background-color');
+    this.colour = computedColour;
+
+    // TODO: throttle this perhaps to colour changes doesn't stack on other swatches
     this.dispatchEvent(
       new CustomEvent("change", {
         detail: { colour: this.colour },
@@ -160,7 +168,8 @@ export class leSwatch extends LitElement {
             </svg>
             <input
               type="color"
-              @input="${(event) => this.updateColour(event.currentTarget.value)}"
+              @input="${(event) =>
+                this.updateColour(event.currentTarget.value)}"
             />
           </div>
           <button
@@ -186,7 +195,7 @@ export class leSwatch extends LitElement {
           <button
             class="swatch-action-button"
             title="Clear"
-            @click="${(event) => this.updateColour("transparent")}"
+            @click="${(event) => this.updateColour("hsl(0 0 0 / 0)")}"
             style="background-color: hsl(from ${this
               .colour} h calc(s * 0.2) 55%);"
           >

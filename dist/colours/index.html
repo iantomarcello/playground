@@ -12,13 +12,19 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+
+      :root {
+        --bleed: 4;
+        --strength: 20%;
+      }
+
       * {
         font-family: "Sora", sans-serif;
       }
 
       .wrapper {
-        --columns: 5;
-        --rows: 5;
+        --columns: 7;
+        --rows: 7;
         --cell_size: 56px;
         display: grid;
         margin: auto;
@@ -66,14 +72,37 @@
       }
 
       function handleSwatchChange(event) {
-        let {x, y} = event.currentTarget.dataset;
+        /** @type HTMLInputElement */
+        const target = event.currentTarget;
+        let {x, y} = target.dataset;
+        event.currentTarget.dataset.touched = true;
+        blendSwatches(x, y, target.colour);
+      }
+
+      function blendSwatches(x, y, colour) {
+        const rootStyle = window.getComputedStyle(document.body);
+        const bleed = parseFloat(rootStyle.getPropertyValue('--bleed'));
+        const strength = rootStyle.getPropertyValue('--strength');
+
         document.querySelectorAll('le-swatch').forEach((swatch) => {
-          if (swatch !== event.currentTarget) {
-            // TODO: Math the logic to spread colour evenly, look for Vector distance calculation
-            swatch.colour = event.detail.colour;
+          if (swatch.dataset.x != x || swatch.dataset.y !== y) {
+            const {x: sx, y: sy} = swatch.dataset;
+            const distance = Math.sqrt(Math.pow((x - sx), 2) + Math.pow((y - sy), 2));
+            distance === 0 && console.log(sx, sy)
+            if (distance <= bleed) {
+              const originalColour = swatch.colour;
+              swatch.colour = `color-mix(
+                in srgb,
+                rgb(from ${swatch.colour} r g b / alpha),
+                  rgb(from ${colour} r g b / alpha)
+                  calc(${bleed - distance} *
+                  ${strength}))`;
+            }
           }
         })
       }
+
+      // TODO: GUI to update size bleed and strength.
 
       function init() {
         let [rows, columns] = getRowAndColumn();
